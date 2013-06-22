@@ -1,0 +1,20 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Assets\Edge.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Terrain.cs" Line="17" Column="7" />
+      <File FileName="Assets\Assets\MapNode.cs" Line="86" Column="17" />
+      <File FileName="Assets\Scripts\MapLayoutManager.cs" Line="23" Column="19" />
+      <File FileName="Assets\Scripts\CharacterMovement.cs" Line="42" Column="31" />
+      <File FileName="Assets\Scripts\CameraMovement.cs" Line="69" Column="35" />
+      <File FileName="Assets\Scripts\GridLayout.cs" Line="7" Column="24" />
+      <File FileName="Assets\Assets\DStarLite.cs" Line="4" Column="23" />
+      <File FileName="Assets\Assets\Point.cs" Line="14" Column="14" />
+      <File FileName="Assets\Assets\Edge.cs" Line="27" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
