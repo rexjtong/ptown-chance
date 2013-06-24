@@ -31,7 +31,7 @@ public class CharacterController : MonoBehaviour {
 			
 			if(PlayerPlane.Raycast(TargetRay, out HitDistance)) {
 				Vector3 TargetPoint = TargetRay.GetPoint(HitDistance);
-				if(TargetPoint.x >= .5 && TargetPoint.z >= -.3 && TargetPoint.x <= TerrainEdge.x && TargetPoint.z <= TerrainEdge.y) {
+				if(TargetPoint.x >= .5 && TargetPoint.z >= -.3 && TargetPoint.x <= TerrainEdge.x - .5 && TargetPoint.z <= TerrainEdge.y - 1) {
 					TargetPosition = TargetRay.GetPoint(HitDistance);
 					var TargetRotation = Quaternion.LookRotation(TargetPoint - transform.position);
 					transform.rotation = TargetRotation;

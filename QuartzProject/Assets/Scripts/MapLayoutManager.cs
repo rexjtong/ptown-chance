@@ -22,6 +22,7 @@ public class MapLayoutManager : MonoBehaviour {
 	
 	void Awake () {
 		Messenger.AddListener<Vector3>("building created", ChangeBuildable);
+		Messenger.AddListener<Vector3[]>("unit position change", UnitPositionChange);
 		Messenger.AddListener<Vector3>("need buildable", IsBuildable);
 		CreateMapLayout();
 	}
@@ -62,5 +63,71 @@ public class MapLayoutManager : MonoBehaviour {
 	
 	void ChangeBuildable(Vector3 Location)  {
 		MapLayout[(int)(Location.x -.5), (int)Location.z].SetBuildable(false);
+	}
+	
+	void UnitPositionChange(Vector3[] Location) {
+		MapLayout[(int)(Location[0].x -.5), (int)Location[0].z].SetBuildable(true);
+
+		if(Location[0].x < MapLayout.GetLength(0) - .5) {
+			MapLayout[(int)(Location[0].x + .5), (int)Location[0].z].SetBuildable(true);
+			
+			if(Location[0].z > 1) {
+				MapLayout[(int)(Location[0].x + .5), (int)Location[0].z - 1].SetBuildable(true);
+				
+			}
+			if(Location[0].z < MapLayout.GetLength(1) - 1) {
+				MapLayout[(int)(Location[0].x + .5), (int)Location[0].z + 1].SetBuildable(true);
+			}
+		}
+		if(Location[0].x > 0.5) {
+			if(Location[0].z > 1) {
+				MapLayout[(int)(Location[0].x - .5), (int)Location[0].z - 1].SetBuildable(true);
+			}
+			if(Location[0].z < MapLayout.GetLength(1) - 1) {
+				MapLayout[(int)(Location[0].x - .5), (int)Location[0].z + 1].SetBuildable(true);
+			}
+		}
+		if(Location[0].x > 1.5) {
+			MapLayout[(int)(Location[0].x - 1.5), (int)Location[0].z].SetBuildable(true);
+			
+			if(Location[0].z > 1) {
+				MapLayout[(int)(Location[0].x - 1.5), (int)Location[0].z - 1].SetBuildable(true);
+			}
+			if(Location[0].z < MapLayout.GetLength(1) - 1) {
+				MapLayout[(int)(Location[0].x - 1.5), (int)Location[0].z + 1].SetBuildable(true);
+			}
+		}
+		
+		MapLayout[(int)(Location[1].x - .5), (int)Location[1].z].SetBuildable(false);
+		
+		if(Location[1].x < MapLayout.GetLength(0) - .5) {
+			MapLayout[(int)(Location[1].x + .5), (int)Location[1].z].SetBuildable(false);
+			
+			if(Location[1].z > 1) {
+				MapLayout[(int)(Location[1].x + .5), (int)Location[1].z - 1].SetBuildable(false);
+				
+			}
+			if(Location[1].z < MapLayout.GetLength(1) - 1) {
+				MapLayout[(int)(Location[1].x + .5), (int)Location[1].z + 1].SetBuildable(false);
+			}
+		}
+		if(Location[1].x > 0.5) {
+			if(Location[1].z > 1) {
+				MapLayout[(int)(Location[1].x - .5), (int)Location[1].z - 1].SetBuildable(false);
+			}
+			if(Location[1].z < MapLayout.GetLength(1) - 1) {
+				MapLayout[(int)(Location[1].x - .5), (int)Location[1].z + 1].SetBuildable(false);
+			}
+		}
+		if(Location[1].x > 1.5) {
+			MapLayout[(int)(Location[1].x - 1.5), (int)Location[1].z].SetBuildable(false);
+			
+			if(Location[1].z > 1) {
+				MapLayout[(int)(Location[1].x - 1.5), (int)Location[1].z - 1].SetBuildable(false);
+			}
+			if(Location[1].z < MapLayout.GetLength(1) - 1) {
+				MapLayout[(int)(Location[1].x - 1.5), (int)Location[1].z + 1].SetBuildable(false);
+			}
+		}
 	}
 }

@@ -21,23 +21,30 @@ public class PlacementBuilding : MonoBehaviour {
 	}
 	
 	void Update () {
-		Plane PlayerPlane = new Plane(Vector3.up, transform.position);
+		Plane PlayerPlane = new Plane(Vector3.up, new Vector3(0f, 0f, 0f));
 		Ray TargetRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		float HitDistance = 0.0f;
 			
 		if(PlayerPlane.Raycast(TargetRay, out HitDistance)) {
 			Messenger.Broadcast<Vector3>("need buildable", transform.position);
 			
-			//if(TargetPoint.x >= .5 && TargetPoint.z >= -.3 && TargetPoint.x <= TerrainEdge.x && TargetPoint.z <= TerrainEdge.y) {
-				TargetPosition = TargetRay.GetPoint(HitDistance);
-			//}
+			TargetPosition = TargetRay.GetPoint(HitDistance);
 		}
 		
-		TargetPosition.x = Mathf.Round(TargetPosition.x/GridSize) * GridSize - .5f;
-   	 	TargetPosition.y = Mathf.Round(TargetPosition.y/GridSize) * GridSize;
-    	TargetPosition.z = Mathf.Round(TargetPosition.z/GridSize) * GridSize + 2f;
+		int x = (int) TargetPosition.x;
+		int y = (int) TargetPosition.y;
+		int z = (int) TargetPosition.z;
+		
+		Vector3 NewPosition = new Vector3(x + .5f, y + 1, z);
+		
+		// TargetPosition.x = Mathf.Round(TargetPosition.x/GridSize) * GridSize + .5f;
+   	 	// TargetPosition.y = Mathf.Round(TargetPosition.y/GridSize) * GridSize + 1f;
+    	// TargetPosition.z = Mathf.Round(TargetPosition.z/GridSize) * GridSize;
+		
 		// move to target location
-		transform.position = TargetPosition;
+		// transform.position = TargetPosition;
+		
+		transform.position = NewPosition;
 	}
 	
 	void PlaceBuilding() {
