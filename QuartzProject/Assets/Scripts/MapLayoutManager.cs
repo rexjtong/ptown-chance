@@ -10,15 +10,17 @@ public class MapLayoutManager : MonoBehaviour {
 	/* Array that stores values for each terrain type.
 	 * Only used for initialization of MapNode array.
 	 * */
-	public int[,] TerrainLayout = new int[,]{{1,2,0,1,0,1,2,1}, {1,2,0,1,1,0,2,2}, {0,2,1,2,1,0,0,1}, {1,2,1,2,0,0,1,2},{1,2,1,2,0,0,1,2},{1,2,1,2,0,0,1,2},{1,2,1,2,0,0,1,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}};
+	public int[,] TerrainLayout = new int[,]{{1,2,0,1,0,1,2,1}, {1,2,0,1,1,0,2,2}, {0,2,1,2,1,0,0,1}, {1,2,1,2,4,0,1,2},{1,2,1,2,0,0,1,2},{1,2,1,2,0,0,1,2},{1,2,1,2,0,0,1,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}, {1,2,0,1,1,0,2,2}};
 	
 	private MapNode[,] MapLayout;		// Array to store all MapNodes
 
 	//***************************************************************//
 	// Prefabs for terrain types. Add more types here
+	public Transform Empty;
 	public Transform Grass;
 	public Transform Gravel;
 	public Transform Stone;
+	public Transform GenericFourByFour;
 	
 	void Awake () {
 		Messenger.AddListener<Vector3>("building created", ChangeBuildable);
@@ -40,11 +42,15 @@ public class MapLayoutManager : MonoBehaviour {
 				// Add more cases here for each type
 				switch (TerrainLayout[x,z]) {
 				case 0:
-					MapLayout[x,z] = new MapNode(Grass); break;
+					MapLayout[x,z] = new MapNode(Empty); break;
 				case 1:
-					MapLayout[x,z] = new MapNode(Gravel); break;
+					MapLayout[x,z] = new MapNode(Grass); break;
 				case 2:
+					MapLayout[x,z] = new MapNode(Gravel); break;
+				case 3:
 					MapLayout[x,z] = new MapNode(Stone); break;
+				case 4:
+					MapLayout[x,z] = new MapNode(GenericFourByFour); break;
 				}
 			}
 		}
