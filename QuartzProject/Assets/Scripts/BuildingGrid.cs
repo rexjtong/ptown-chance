@@ -6,21 +6,15 @@ using System.Collections;
  * */
 public class BuildingGrid : MonoBehaviour {
 	
-	public Transform GridPrefab;	// prefab for grid
-	public bool BuildingGridOn = false;
+	public Transform GridPrefab;			// prefab for grid
+	public bool BuildingGridOn = false;		// Building Placement Mode
 	
 	void Awake () {
+		// Add Listeners
 		Messenger.AddListener<MapNode[,]>("map layout", CreateGrid);
 		Messenger.AddListener("start building", ToggleVisibility);
 		Messenger.AddListener("stop building", ToggleVisibility);
 		Messenger.AddListener("place building", ToggleVisibility);
-	}
-	
-	void Start () {
-	}
-	
-	// Change later to support toggling grid in "building mode"
-	void Update() {
 	}
 	
 	/* CreateGrid() uses info from MapLayoutManager for dimensions
@@ -30,7 +24,7 @@ public class BuildingGrid : MonoBehaviour {
 		for(int x = 0; x < GridLength.GetLength(0); x++) {
 			for(int z = 0; z < GridLength.GetLength(1); z++) {
 				Transform gameObject = transform;
-				Transform instance = (Transform) Instantiate(GridPrefab, new Vector3(x, 0, z), Quaternion.identity);
+				Transform instance = (Transform) Instantiate(GridPrefab, new Vector3(x - .5f, 0, z), Quaternion.identity);
 				instance.parent = gameObject;
 			}
 		}

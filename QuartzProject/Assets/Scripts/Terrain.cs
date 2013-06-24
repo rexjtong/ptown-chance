@@ -21,7 +21,7 @@ public class Terrain : MonoBehaviour {
 			for(int z = 0; z < TerrainLayout.GetLength(1); z++) {
 				
 				Transform gameObject = transform;
-				Transform instance = (Transform) Instantiate(TerrainLayout[x,z].GetTerrain(), new Vector3(x + (float).5, 0, z), Quaternion.identity);
+				Transform instance = (Transform) Instantiate(TerrainLayout[x,z].GetTerrain(), new Vector3(x, 0, z), Quaternion.identity);
 				instance.parent = gameObject;
 			}
 		}
