@@ -7,20 +7,20 @@ using System;
  * */
 public class CharacterController : MonoBehaviour {
 	
-	private bool MovementOn = true;		// can character move
-	public float MovementSpeed;			// Movement Speed
-	private Vector3 TargetPosition;		// Position to be moved to
-	private Vector2 TerrainEdge;		// Edges of map
-	private bool NowBuilding = false;	// true when building grid is on
+	private bool MovementOn = true;				// can character move
+	public float MovementSpeed;					// Movement Speed
+	private Vector3 TargetPosition;				// Position to be moved to
+	private Vector2 TerrainEdge;				// Edges of map
+	private bool NowBuilding = false;			// true when building grid is on
 	private bool CancelFirstClick = false;		// To cancel first click when canceling building grid
 	
 	void Awake () {
 		// Add listeners
-		Messenger.AddListener<MapNode[,]>("map layout", SetEdges);
-		Messenger.AddListener("start building", ToggleMovement);
-		Messenger.AddListener("stop building", StopBuilding);
-		Messenger.AddListener("place building", ToggleMovement);
-		Messenger.AddListener<Vector3>("building coordinates", MoveToBuilding);
+		Messenger.AddListener<MapNode[,]>("map layout", SetEdges);					// Listen from MapLayoutManager
+		Messenger.AddListener("start building", ToggleMovement);					// Listen from BuildingManager
+		Messenger.AddListener("stop building", StopBuilding);						// Listen from BuildingManager
+		Messenger.AddListener("place building", ToggleMovement);					// Listen from BuildingManager
+		Messenger.AddListener<Vector3>("building coordinates", MoveToBuilding);		// Listen from PlacementBuilding
 	}
 	
 	void Start () {
@@ -54,14 +54,14 @@ public class CharacterController : MonoBehaviour {
 		// If currently building
 		if(NowBuilding) {
 			// Check if right next to target building location
-			if(Math.Abs(transform.position.x - TargetPosition.x) <= 1 && Math.Abs(transform.position.z - TargetPosition.z) <= 1) {
-				TargetPosition = transform.position;			// stop
-				Messenger.Broadcast("place building");			// broadcast place building
-				NowBuilding = false;							// turn off building mode
+			if(Math.Abs(transform.position.x - TargetPosition.x) <= 1.5 && Math.Abs(transform.position.z - TargetPosition.z) <= 1.5) {
+				TargetPosition = transform.position;			// Stop character
+				Messenger.Broadcast("place building");			// Send to BuildingManager/PlacementBuilding
+				NowBuilding = false;							// Turn off building mode
 			}
 		}
 		
-		// move to target location
+		// Move to target location
 		transform.position = Vector3.MoveTowards(transform.position, TargetPosition, MovementSpeed * Time.deltaTime);
 	}
 	
@@ -70,10 +70,10 @@ public class CharacterController : MonoBehaviour {
 		this.TerrainEdge = new Vector2(MapEdges.GetLength(0), MapEdges.GetLength(1));
 	}
 	
-	// toggle movement on and off
+	// Toggle movement on and off
 	void ToggleMovement() {
 		MovementOn = !MovementOn;
-		CancelFirstClick = true;		// set to cancel first right click
+		CancelFirstClick = true;		// Set to cancel first right click
 	}
 	
 	// Move to the building location

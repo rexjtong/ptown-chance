@@ -9,7 +9,7 @@ public class Terrain : MonoBehaviour {
 	
 	void Awake () {
 		// Add listeners
-		Messenger.AddListener<MapNode[,]>("map layout", InstantiateTerrain);
+		Messenger.AddListener<MapNode[,]>("map layout", InstantiateTerrain);	// Listen from MapLayoutManager
 	}
 	
 	/* Instantiates Terrain by taking a message from MapLayoutManager.

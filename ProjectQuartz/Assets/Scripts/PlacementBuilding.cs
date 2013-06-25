@@ -6,16 +6,15 @@ public class PlacementBuilding : MonoBehaviour {
 	public Transform PlacedBuilding;	// Actual Building
 	private Vector3 TargetPosition;		// Position to be moved to
 	private Vector2 TerrainEdge;		// Edges of map
-	// public int GridSize = 1;
 	private bool Buildable;				// Gotten from MapLayoutManager
-	private bool NowBuilding = false;
+	private bool NowBuilding = false;	// Is building mode on
 	
 	void Awake() {
 		// Add Listeners
-		Messenger.AddListener("give coordinates", GiveCoordinates);
-		Messenger.AddListener("place building", PlaceBuilding);
-		Messenger.AddListener("stop building", StopBuilding);
-		Messenger.AddListener<bool>("building color", SetBuildableColor);
+		Messenger.AddListener("give coordinates", GiveCoordinates);			// Listen from BuildingManager
+		Messenger.AddListener("place building", PlaceBuilding);				// Listen from BuildingManager/CharacterController
+		Messenger.AddListener("stop building", StopBuilding);				// Listen from BuildingManager
+		Messenger.AddListener<bool>("building color", SetBuildableColor);	// Listen from BuildingManager
 	}
 	
 	void Start () {

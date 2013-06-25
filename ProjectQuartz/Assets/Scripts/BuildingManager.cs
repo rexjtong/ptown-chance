@@ -14,29 +14,33 @@ public class BuildingManager : MonoBehaviour {
 	
 	void Start () {
 		// Add listeneres
-		Messenger.AddListener<bool>("is buildable", SetBuildable);
-		Messenger.AddListener("place building", StopBuildingNow);
+		Messenger.AddListener<bool>("is buildable", SetBuildable);	// Listen from MapLayoutManager
+		Messenger.AddListener("place building", StopBuildingNow);	// Listen from CharacterController
 	}
 	
-	// Update is called once per frame
 	void Update () {
+		// When building mode is not on
 		if(!BuildingNow) {
 			// When button pressed down show grid
 			if(Input.GetButtonDown("ToggleGrid")) {
-				Messenger.Broadcast("start building");
+				Messenger.Broadcast("start building");				// Send to PlacementBuilding/CharacterController
 				BuildingNow = true;
-				Instantiate(OneSpacePlacing);
+				Instantiate(OneSpacePlacing);						// Create the PreBuilding
 			}
 		}
+		// when building mode is on
 		if(BuildingNow) {
-			Messenger.Broadcast<bool>("building color", Buildable);
+			Messenger.Broadcast<bool>("building color", Buildable);	// Send to PlacementBuilding
+			// right click stops building
 			if(Input.GetMouseButtonDown(1)) {
-				Messenger.Broadcast("stop building");
+				Messenger.Broadcast("stop building");				// Send to PlacementBuilding/CharacterController
 				BuildingNow = false;
 			}
+			// Check if node is buildable
 			if(Buildable){
+				// left click
 				if(Input.GetMouseButtonDown(0)) {
-					Messenger.Broadcast("give coordinates");
+					Messenger.Broadcast("give coordinates");		// Send to PlacementBuilding
 				}
 			}
 		}

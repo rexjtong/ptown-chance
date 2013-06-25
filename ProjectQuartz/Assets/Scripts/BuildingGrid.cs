@@ -11,10 +11,10 @@ public class BuildingGrid : MonoBehaviour {
 	
 	void Awake () {
 		// Add Listeners
-		Messenger.AddListener<MapNode[,]>("map layout", CreateGrid);
-		Messenger.AddListener("start building", ToggleVisibility);
-		Messenger.AddListener("stop building", ToggleVisibility);
-		Messenger.AddListener("place building", ToggleVisibility);
+		Messenger.AddListener<MapNode[,]>("map layout", CreateGrid);	// Listen from MapLayoutManager
+		Messenger.AddListener("start building", ToggleVisibility);		// Listen from BuildingManager
+		Messenger.AddListener("stop building", ToggleVisibility);		// Listen from BuildingManager
+		Messenger.AddListener("place building", ToggleVisibility);		// Listen from BuildingManager/CharacterController
 	}
 	
 	/* CreateGrid() uses info from MapLayoutManager for dimensions

@@ -17,33 +17,22 @@ public class UnitPosition : MonoBehaviour {
    	 	NewPosition.y = (int) transform.position.y;
     	NewPosition.z = (int) transform.position.z;
 		
-		Messenger.Broadcast<Vector3>("unit position start", NodePosition);
-		
-		// NodePosition.x = Mathf.Round(transform.position.x/GridSize) * GridSize - .5f;
-   	 	// NodePosition.y = Mathf.Round(transform.position.y/GridSize) * GridSize;
-    	// NodePosition.z = Mathf.Round(transform.position.z/GridSize) * GridSize;
-		
-		// NewPosition.x = Mathf.Round(transform.position.x/GridSize) * GridSize - .5f;
-   	 	// NewPosition.y = Mathf.Round(transform.position.y/GridSize) * GridSize;
-    	// NewPosition.z = Mathf.Round(transform.position.z/GridSize) * GridSize;
+		Messenger.Broadcast<Vector3>("unit position start", NodePosition);	// Sent to MapLayoutManager
 	}
 	
 	void Update () {
-		// Change position
+		// If position has changed
 		if(NewPosition != transform.position) {
+			// Set new position
 			NewPosition.x = (int) transform.position.x;
    	 		NewPosition.y = (int) transform.position.y;
     		NewPosition.z = (int) transform.position.z;
 		}
-		
-		// NewPosition.x = Mathf.Round(transform.position.x/GridSize) * GridSize - .5f;
-   	 	// NewPosition.y = Mathf.Round(transform.position.y/GridSize) * GridSize;
-    	// NewPosition.z = Mathf.Round(transform.position.z/GridSize) * GridSize;
-		
+
 		// Message Map that position has been changed in Map
 		if(!NodePosition.Equals(NewPosition)) {
-			Vector3[] PositionChanges = {NodePosition, NewPosition};
-			Messenger.Broadcast<Vector3[]>("unit position change", PositionChanges);
+			Vector3[] PositionChanges = {NodePosition, NewPosition};					// Array to be sent
+			Messenger.Broadcast<Vector3[]>("unit position change", PositionChanges);	// Sent to MapLayoutManager
 			NodePosition = NewPosition;
 		}
 	}

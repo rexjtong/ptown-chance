@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour {
 	private Vector2 CameraLimits;	// camera pan limits
 	
 	void Awake () {
-		Messenger.AddListener<MapNode[,]>("map layout", SetCameraLimits);
+		Messenger.AddListener<MapNode[,]>("map layout", SetCameraLimits);	// Listen from MapLayoutManager
 	}
 	
 	void LateUpdate () {
