@@ -5,6 +5,7 @@ public class BuildingManager : MonoBehaviour {
 	
 	// Transforms for PreBuildings
 	public Transform OneSpacePlacing;
+	public Transform OneSpaceTowerPlacing;
 	public Transform FourSpacePlacing;
 	
 	private bool BuildingNow = false;	// Is building mode on
@@ -25,7 +26,7 @@ public class BuildingManager : MonoBehaviour {
 			if(Input.GetButtonDown("ToggleGrid")) {
 				Messenger.Broadcast("start building");				// Send to PlacementBuilding/CharacterController
 				BuildingNow = true;
-				Instantiate(OneSpacePlacing);						// Create the PreBuilding
+				Instantiate(OneSpaceTowerPlacing);						// Create the PreBuilding
 			}
 		}
 		// when building mode is on

@@ -145,5 +145,13 @@ public class MapLayoutManager : MonoBehaviour {
 	// Sets position of unit start locations to be not buildable
 	void UnitPositionStart(Vector3 Location) {
 		MapLayout[(int)(Location.x), (int)Location.z].SetBuildable(false);
+		MapLayout[(int)(Location.x) + 1, (int)Location.z].SetBuildable(false);
+		MapLayout[(int)(Location.x) - 1, (int)Location.z].SetBuildable(false);
+		MapLayout[(int)(Location.x), (int)Location.z - 1].SetBuildable(false);
+		MapLayout[(int)(Location.x) + 1, (int)Location.z - 1].SetBuildable(false);
+		MapLayout[(int)(Location.x) - 1, (int)Location.z - 1].SetBuildable(false);
+		MapLayout[(int)(Location.x), (int)Location.z + 1].SetBuildable(false);
+		MapLayout[(int)(Location.x) + 1, (int)Location.z + 1].SetBuildable(false);
+		MapLayout[(int)(Location.x) - 1, (int)Location.z + 1].SetBuildable(false);
 	}
 }
