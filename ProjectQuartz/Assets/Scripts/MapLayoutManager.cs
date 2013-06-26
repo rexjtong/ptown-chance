@@ -24,10 +24,10 @@ public class MapLayoutManager : MonoBehaviour {
 	
 	void Awake () {
 		// Add listeners
-		Messenger.AddListener<Vector3>("building created", ChangeBuildable);
-		Messenger.AddListener<Vector3>("need buildable", IsBuildable);
-		Messenger.AddListener<Vector3[]>("unit position change", UnitPositionChange);
-		Messenger.AddListener<Vector3>("unit position start", UnitPositionStart);
+		Messenger.AddListener<Vector3>("building created", NewBuilding);				// Listen from PlacementBuilding
+		Messenger.AddListener<Vector3>("need buildable", IsBuildable);						// Listen from PlacementBuilding
+		Messenger.AddListener<Vector3[]>("unit position change", UnitPositionChange);		// Listen from UnitPosition
+		Messenger.AddListener<Vector3>("unit position start", UnitPositionStart);			// Listen from UnitPosition
 		CreateMapLayout();
 	}
 	
@@ -72,8 +72,9 @@ public class MapLayoutManager : MonoBehaviour {
 	}
 	
 	// Changes 9x9 square around unit to be not buildable
-	void ChangeBuildable(Vector3 Location)  {
+	void NewBuilding(Vector3 Location)  {
 		MapLayout[(int)(Location.x), (int)Location.z].SetBuildable(false);
+		MapLayout[(int)(Location.x), (int)Location.z].SetTraversable(false);
 	}
 	
 	void UnitPositionChange(Vector3[] Location) {
@@ -84,7 +85,6 @@ public class MapLayoutManager : MonoBehaviour {
 			
 			if(Location[0].z > 1) {
 				MapLayout[(int)(Location[0].x + 1), (int)Location[0].z - 1].SetBuildable(true);
-				
 			}
 			if(Location[0].z < MapLayout.GetLength(1) - 1) {
 				MapLayout[(int)(Location[0].x + 1), (int)Location[0].z + 1].SetBuildable(true);

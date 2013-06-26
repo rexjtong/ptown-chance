@@ -55,10 +55,11 @@
      <Compile Include="Assets\Scripts\Health.cs" />
      <Compile Include="Assets\Scripts\MapLayoutManager.cs" />
      <Compile Include="Assets\Scripts\PlacementBuilding.cs" />
+     <Compile Include="Assets\Scripts\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Temporary.cs" />
      <Compile Include="Assets\Scripts\Terrain.cs" />
      <Compile Include="Assets\Scripts\Tower.cs" />
-     <Compile Include="Assets\Scripts\UnitPosition.cs" />
+     <Compile Include="Assets\Scripts\UnitPositionManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

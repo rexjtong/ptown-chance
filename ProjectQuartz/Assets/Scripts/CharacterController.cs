@@ -32,15 +32,18 @@ public class CharacterController : MonoBehaviour {
 		if(!NowBuilding) {
 			// if right click set target location to move to
 			if(Input.GetMouseButtonDown(1) && MovementOn && !CancelFirstClick) {
-				Plane PlayerPlane = new Plane(Vector3.up, transform.position);
+				Plane PlayerPlane = new Plane(Vector3.up, Vector3.zero);
 				Ray TargetRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 				float HitDistance = 0.0f;
 			
 				if(PlayerPlane.Raycast(TargetRay, out HitDistance)) {
 					Vector3 TargetPoint = TargetRay.GetPoint(HitDistance);
-					if(TargetPoint.x >= .5 && TargetPoint.z >= -.3 && TargetPoint.x <= TerrainEdge.x - .5 && TargetPoint.z <= TerrainEdge.y - 1) {
+					if(TargetPoint.x >= .5 && TargetPoint.z >= -.5 && TargetPoint.x <= TerrainEdge.x - .5 && TargetPoint.z <= TerrainEdge.y - .5) {
 						TargetPosition = TargetRay.GetPoint(HitDistance);
+						TargetPosition.y += .5f;
 						var TargetRotation = Quaternion.LookRotation(TargetPoint - transform.position);
+						TargetRotation.z = 0;
+						TargetRotation.x = 0;
 						transform.rotation = TargetRotation;
 					}
 				}
