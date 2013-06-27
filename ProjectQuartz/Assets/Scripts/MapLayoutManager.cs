@@ -25,9 +25,9 @@ public class MapLayoutManager : MonoBehaviour {
 	void Awake () {
 		// Add listeners
 		Messenger.AddListener<Vector3>("building created", NewBuilding);				// Listen from PlacementBuilding
-		Messenger.AddListener<Vector3>("need buildable", IsBuildable);						// Listen from PlacementBuilding
-		Messenger.AddListener<Vector3[]>("unit position change", UnitPositionChange);		// Listen from UnitPosition
-		Messenger.AddListener<Vector3>("unit position start", UnitPositionStart);			// Listen from UnitPosition
+		Messenger.AddListener<Vector3>("need buildable", IsBuildable);					// Listen from PlacementBuilding
+		Messenger.AddListener<Vector3[]>("unit position change", UnitPositionChange);	// Listen from UnitPositionManager
+		Messenger.AddListener<Vector3>("unit position start", UnitPositionStart);		// Listen from UnitPositionManager
 		CreateMapLayout();
 	}
 	
@@ -78,6 +78,19 @@ public class MapLayoutManager : MonoBehaviour {
 	}
 	
 	void UnitPositionChange(Vector3[] Location) {
+		Vector3 OldLocation = new Vector3(Mathf.Round(Location[0].x - .5f), Mathf.Round(Location[0].y), Mathf.Round(Location[0].z - .5f));
+		Vector3 NewLocation = new Vector3(Mathf.Round(Location[1].x - .5f), Mathf.Round(Location[1].y), Mathf.Round(Location[1].z - .5f));
+		
+		MapLayout[(int)OldLocation.x, (int)OldLocation.z].SetBuildable(true);
+		MapLayout[(int)OldLocation.x + 1, (int)OldLocation.z].SetBuildable(true);
+		MapLayout[(int)OldLocation.x, (int)OldLocation.z + 1].SetBuildable(true);
+		MapLayout[(int)OldLocation.x +1, (int)OldLocation.z + 1].SetBuildable(true);
+		
+		MapLayout[(int)NewLocation.x, (int)NewLocation.z].SetBuildable(false);
+		MapLayout[(int)NewLocation.x + 1, (int)NewLocation.z].SetBuildable(false);
+		MapLayout[(int)NewLocation.x, (int)NewLocation.z + 1].SetBuildable(false);
+		MapLayout[(int)NewLocation.x + 1, (int)NewLocation.z + 1].SetBuildable(false);
+		/*
 		MapLayout[(int)(Location[0].x), (int)Location[0].z].SetBuildable(true);
 
 		if(Location[0].x < MapLayout.GetLength(0) - 1) {
@@ -140,10 +153,17 @@ public class MapLayoutManager : MonoBehaviour {
 				MapLayout[(int)(Location[1].x - 1), (int)Location[1].z + 1].SetBuildable(false);
 			}
 		}
+		*/
 	}
 	
 	// Sets position of unit start locations to be not buildable
 	void UnitPositionStart(Vector3 Location) {
+		MapLayout[(int)Location.x, (int)Location.z].SetBuildable(false);
+		MapLayout[(int)Location.x + 1, (int)Location.z].SetBuildable(false);
+		MapLayout[(int)Location.x, (int)Location.z + 1].SetBuildable(false);
+		MapLayout[(int)Location.x + 1, (int)Location.z + 1].SetBuildable(false);
+		
+		/*
 		MapLayout[(int)(Location.x), (int)Location.z].SetBuildable(false);
 		MapLayout[(int)(Location.x) + 1, (int)Location.z].SetBuildable(false);
 		MapLayout[(int)(Location.x) - 1, (int)Location.z].SetBuildable(false);
@@ -153,5 +173,6 @@ public class MapLayoutManager : MonoBehaviour {
 		MapLayout[(int)(Location.x), (int)Location.z + 1].SetBuildable(false);
 		MapLayout[(int)(Location.x) + 1, (int)Location.z + 1].SetBuildable(false);
 		MapLayout[(int)(Location.x) - 1, (int)Location.z + 1].SetBuildable(false);
+		*/
 	}
 }

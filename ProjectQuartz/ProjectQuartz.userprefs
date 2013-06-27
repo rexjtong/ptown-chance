@@ -1,16 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MapLayoutManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CharacterController.cs" Line="46" Column="28" />
-      <File FileName="Assets\Scripts\PlacementBuilding.cs" Line="17" Column="99" />
-      <File FileName="Assets\Scripts\Bullet.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CharacterController.cs" Line="41" Column="130" />
+      <File FileName="Assets\Scripts\PlayerManager.cs" Line="4" Column="75" />
+      <File FileName="Assets\Scripts\PlacementBuilding.cs" Line="9" Column="60" />
       <File FileName="Assets\Scripts\BuildingManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Temporary.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Health.cs" Line="20" Column="51" />
-      <File FileName="Assets\Scripts\MapLayoutManager.cs" Line="87" Column="84" />
-      <File FileName="Assets\Scripts\UnitPositionManager.cs" Line="24" Column="115" />
+      <File FileName="Assets\Scripts\MapLayoutManager.cs" Line="79" Column="2" />
+      <File FileName="Assets\Scripts\Health.cs" Line="20" Column="52" />
+      <File FileName="Assets\Scripts\Tower.cs" Line="21" Column="18" />
+      <File FileName="Assets\Scripts\UnitPositionManager.cs" Line="46" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
