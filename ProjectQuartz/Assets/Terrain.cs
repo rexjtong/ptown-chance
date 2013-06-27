@@ -5,7 +5,7 @@ using System.Collections;
  * Instantiate each prefab individually by calling information from each
  * MapNode.
  * */
-public class Terrain : MonoBehaviour {
+public class Terrains : MonoBehaviour {
 	
 	void Awake () {
 		// Add listeners
