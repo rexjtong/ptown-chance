@@ -12,7 +12,8 @@ public class MapLayoutManager : MonoBehaviour {
 	 * */
 	public int[,] TerrainLayout = new int[,]{{1,2,3,1,3,1,2,1}, {1,2,3,1,1,3,2,2}, {3,2,1,2,1,3,3,1}, {1,2,1,2,1,3,1,2},{1,2,1,2,3,3,1,2},{1,2,1,2,3,3,1,2},{1,2,1,2,3,3,1,2}, {1,2,3,1,1,3,2,2}, {1,2,3,1,1,3,2,2}, {1,2,3,1,1,3,2,2}, {1,2,3,1,1,3,2,2}, {1,2,3,1,1,3,2,2}, {1,2,3,1,1,3,2,2}, {1,2,3,1,1,3,2,2}, {1,2,3,1,1,3,2,2}, {1,2,3,1,1,3,2,2}};
 	
-	private MapNode[,] MapLayout;		// Array to store all MapNodes
+	private MapNode[,] MapLayout1;		// Array to store all MapNodes
+	private MapNode[,] MapLayout;
 
 	//***************************************************************//
 	// Prefabs for terrain types. Add more types here
@@ -78,11 +79,11 @@ public class MapLayoutManager : MonoBehaviour {
 	}
 	
 	void UnitPositionChange(Vector3[] Location) {
-		MayLayout[(int)Location[0].x, (int)Location[0].z].SetBuildable(true);
-		MayLayout[(int)Location[1].x, (int)Location[1].z].SetBuildable(true);
+		MapLayout[(int)Location[0].x, (int)Location[0].z].SetBuildable(true);
+		MapLayout[(int)Location[1].x, (int)Location[1].z].SetBuildable(true);
 		
-		MayLayout[(int)Location[2].x, (int)Location[2].z].SetBuildable(false);
-		MayLayout[(int)Location[3].x, (int)Location[3].z].SetBuildable(false);
+		MapLayout[(int)Location[2].x, (int)Location[2].z].SetBuildable(false);
+		MapLayout[(int)Location[3].x, (int)Location[3].z].SetBuildable(false);
 		
 		/*
 		Vector3 OldLocation = new Vector3(Mathf.Round(Location[0].x - .5f), Mathf.Round(Location[0].y), Mathf.Round(Location[0].z - .5f));
@@ -102,8 +103,8 @@ public class MapLayoutManager : MonoBehaviour {
 	
 	// Sets position of unit start locations to be not buildable
 	void UnitPositionStart(Vector3[] Location) {
-		MayLayout[(int)Location[0].x, (int)Location[0].z].SetBuildable(false);
-		MayLayout[(int)Location[1].x, (int)Location[1].z].SetBuildable(false);
+		MapLayout[(int)Location[0].x, (int)Location[0].z].SetBuildable(false);
+		MapLayout[(int)Location[1].x, (int)Location[1].z].SetBuildable(false);
 		
 		/*
 		MapLayout[(int)Location.x, (int)Location.z].SetBuildable(false);

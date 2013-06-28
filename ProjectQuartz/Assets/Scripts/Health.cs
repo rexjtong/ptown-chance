@@ -17,8 +17,7 @@ public class Health : MonoBehaviour {
 			CurrentHealth = MaxHealth;
 		}
 		if(CurrentHealth <= 0) {
-			GameObject Parent = transform.parent.gameObject;
-			Destroy (Parent);
+			Destroy (gameObject);
 		}
 	}
 	
