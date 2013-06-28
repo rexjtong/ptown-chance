@@ -51,7 +51,7 @@ public class EnemySpawnManager : MonoBehaviour {
 	{
 		isSpawning = true;
 		
-		Instantiate(enemy);
+		Instantiate(enemy, transform.position, Quaternion.identity);
 		
 		timer = 0.0f;
 		randPeriod = Random.Range(MIN_RAND_PERIOD, MAX_RAND_PERIOD);
