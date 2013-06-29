@@ -17,11 +17,11 @@ public class EnemySpawnManager : MonoBehaviour {
 	private float timer = 0.0f;
 	
 	// Base period between enemy spawns
-	private const float SPAWN_PERIOD = 5.0f;
+	public float SPAWN_PERIOD = 5.0f;
 	// Min additional error added to spawn period
-	private const float MIN_RAND_PERIOD = -5.0f;	
+	public float MIN_RAND_PERIOD = -5.0f;	
 	// Max additional error added to sapwn period
-	private const float MAX_RAND_PERIOD = 5.0f;
+	public float MAX_RAND_PERIOD = 5.0f;
 
 	private float randPeriod;							// Additional error added onto spawn period
 														// is initialized on Start() and is then randomized
