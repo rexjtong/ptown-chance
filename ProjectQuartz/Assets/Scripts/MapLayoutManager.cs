@@ -79,11 +79,15 @@ public class MapLayoutManager : MonoBehaviour {
 	}
 	
 	void UnitPositionChange(Vector3[] Location) {
-		MapLayout[(int)Location[0].x, (int)Location[0].z].SetBuildable(true);
-		MapLayout[(int)Location[1].x, (int)Location[1].z].SetBuildable(true);
+		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[0].z)].SetBuildable(true);
+		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[1].z)].SetBuildable(true);
+		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[0].z)].SetBuildable(true);
+		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[1].z)].SetBuildable(true);
 		
-		MapLayout[(int)Location[2].x, (int)Location[2].z].SetBuildable(false);
-		MapLayout[(int)Location[3].x, (int)Location[3].z].SetBuildable(false);
+		MapLayout[Mathf.RoundToInt(Location[2].x), Mathf.RoundToInt(Location[2].z)].SetBuildable(false);
+		MapLayout[Mathf.RoundToInt(Location[3].x), Mathf.RoundToInt(Location[3].z)].SetBuildable(false);
+		MapLayout[Mathf.RoundToInt(Location[3].x), Mathf.RoundToInt(Location[2].z)].SetBuildable(false);
+		MapLayout[Mathf.RoundToInt(Location[2].x), Mathf.RoundToInt(Location[3].z)].SetBuildable(false);
 		
 		/*
 		Vector3 OldLocation = new Vector3(Mathf.Round(Location[0].x - .5f), Mathf.Round(Location[0].y), Mathf.Round(Location[0].z - .5f));
@@ -103,8 +107,12 @@ public class MapLayoutManager : MonoBehaviour {
 	
 	// Sets position of unit start locations to be not buildable
 	void UnitPositionStart(Vector3[] Location) {
-		MapLayout[(int)Location[0].x, (int)Location[0].z].SetBuildable(false);
-		MapLayout[(int)Location[1].x, (int)Location[1].z].SetBuildable(false);
+		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[0].z)].SetBuildable(false);
+		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[1].z)].SetBuildable(false);
+		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[0].z)].SetBuildable(false);
+		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[1].z)].SetBuildable(false);
+		// MapLayout[(int)Location[0].x, (int)Location[0].z].SetBuildable(false);
+		
 		
 		/*
 		MapLayout[(int)Location.x, (int)Location.z].SetBuildable(false);

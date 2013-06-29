@@ -4,6 +4,7 @@ using System.Collections;
 public class Health : MonoBehaviour {
 	
 	public float MaxHealth;
+	public Transform Unit;
 	private float CurrentHealth;
 	
 	// Use this for initialization

@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: 411dca517a99d8444a76d38b8a608312
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - OneSpacePlacing: {fileID: 400000, guid: 8cd5c802add8b5d45a55caeef82e0f33, type: 2}
+  - OneSpaceTowerPlacing: {instanceID: 0}
+  - FourSpacePlacing: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
