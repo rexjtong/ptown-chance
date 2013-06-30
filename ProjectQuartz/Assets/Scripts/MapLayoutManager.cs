@@ -75,7 +75,7 @@ public class MapLayoutManager : MonoBehaviour {
 	// Changes 9x9 square around unit to be not buildable
 	void NewBuilding(Vector3 Location)  {
 		MapLayout[(int)Location.x, (int)Location.z].SetBuildable(false);
-		MapLayout[(int)Location.x, (int)Location.z].SetTraversable(false);
+		MapLayout[(int)Location.x, (int)Location.z].SetPassable(false);
 	}
 	
 	void UnitPositionChange(Vector3[] Location) {

@@ -44,9 +44,17 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\AStar.cs" />
      <Compile Include="Assets\Resources\Callback.cs" />
+     <Compile Include="Assets\Resources\Edge.cs" />
+     <Compile Include="Assets\Resources\Grid.cs" />
+     <Compile Include="Assets\Resources\KNodeComparator.cs" />
+     <Compile Include="Assets\Resources\LPAStar.cs" />
      <Compile Include="Assets\Resources\MapNode.cs" />
      <Compile Include="Assets\Resources\Messenger.cs" />
+     <Compile Include="Assets\Resources\Node.cs" />
+     <Compile Include="Assets\Resources\NodeComparator.cs" />
+     <Compile Include="Assets\Resources\Point.cs" />
      <Compile Include="Assets\Scripts\BuildingGrid.cs" />
      <Compile Include="Assets\Scripts\BuildingManager.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
