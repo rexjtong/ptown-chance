@@ -1,22 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\AStar.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TowerBehaviour.cs">
     <Files>
-      <File FileName="Assets\Resources\Node.cs" Line="3" Column="1" />
-      <File FileName="Assets\Resources\KNodeComparator.cs" Line="8" Column="5" />
-      <File FileName="Assets\Resources\LPAStar.cs" Line="4" Column="21" />
-      <File FileName="Assets\Resources\AStar.cs" Line="4" Column="19" />
-      <File FileName="Assets\Resources\Grid.cs" Line="177" Column="22" />
-      <File FileName="Assets\Resources\Point.cs" Line="33" Column="23" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EnemySpawnManager.cs">
-    <Files>
-      <File FileName="Assets\Scripts\Health.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnemySpawnManager.cs" Line="24" Column="8" />
+      <File FileName="Assets\Scripts\TowerBehaviour.cs" Line="47" Column="75" />
+      <File FileName="Assets\Scripts\Terrain.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\MapLayoutManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UnitPositionManager.cs" Line="1" Column="1" />
->>>>>>> c9dfe6bf56b2c62214e2736e51fc3e7039ff6fa1
+      <File FileName="Assets\Scripts\CharacterController.cs" Line="68" Column="63" />
+      <File FileName="Assets\Scripts\PlacementBuilding.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UnitPositionManager.cs" Line="16" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

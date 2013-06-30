@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /* This class is used as nodes for a 2D array. It stores information about
  * that node in the map.
  * */
-public class MapNode : Node {
+public class MapNode {
 	
 	bool Visible = false;			// can node be seen
 	bool Passable = true;		// can node be moved on
@@ -17,7 +17,7 @@ public class MapNode : Node {
 	public MapNode() {
 	}
 	
-	public MapNode(int x, int y, bool Pass) : base(x,y,Pass,MaxConnections) {
+	public MapNode(int x, int y, bool Pass) {
 	}
 	
 	/* Single argument constructor sets prefab used for node.
@@ -63,6 +63,7 @@ public class MapNode : Node {
 		return TerrainPrefab;
 	}
 	
+	/*
 	public override bool AddConnection(Node n, int Length) {
 		if(ConnectionExists(n)) {
 			return false;
@@ -106,4 +107,5 @@ public class MapNode : Node {
 		
 		return null;
 	}
+	*/
 }
