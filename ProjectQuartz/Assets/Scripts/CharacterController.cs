@@ -82,7 +82,7 @@ public class CharacterController : MonoBehaviour {
 	// Move to the building location
 	void MoveToBuilding(Vector3 Location) {
 		NowBuilding = true;
-		TargetPosition = new Vector3(Location.x, Location.y + .5f, Location.z);
+		TargetPosition = new Vector3(Location.x, .5f, Location.z);
 		var TargetRotation = Quaternion.LookRotation(TargetPosition - transform.position);
 		transform.rotation = TargetRotation;
 	}

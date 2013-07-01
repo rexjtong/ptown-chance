@@ -4,10 +4,13 @@ using System.Collections;
 public class PlacementBuilding : MonoBehaviour {
 	
 	public Transform PlacedBuilding;	// Actual Building
+	
 	private Vector3 TargetPosition;		// Position to be moved to
 	private Vector2 TerrainEdge;		// Edges of map
 	private bool Buildable;				// Gotten from MapLayoutManager
 	private bool NowBuilding = false;	// Is building mode on
+	private Vector3 StartingPosition;
+	private float YPlacement;
 	
 	void Awake() {
 		// Add Listeners
@@ -18,6 +21,8 @@ public class PlacementBuilding : MonoBehaviour {
 	}
 	
 	void Start () {
+		Renderer renderer = gameObject.GetComponent<Renderer>();
+		YPlacement = (renderer.bounds.max.y - renderer.bounds.min.y) / 2;
 		TargetPosition = transform.position;	// Initial position so building doesn't fly to origin
 	}
 	
@@ -34,14 +39,7 @@ public class PlacementBuilding : MonoBehaviour {
 				TargetPosition = TargetRay.GetPoint(HitDistance);
 			}
 		
-			Vector3 NewPosition = new Vector3((int) TargetPosition.x, (int) TargetPosition.y, (int) TargetPosition.z);
-		
-		// TargetPosition.x = Mathf.Round(TargetPosition.x/GridSize) * GridSize + .5f;
-   	 	// TargetPosition.y = Mathf.Round(TargetPosition.y/GridSize) * GridSize + 1f;
-    	// TargetPosition.z = Mathf.Round(TargetPosition.z/GridSize) * GridSize;
-		
-		// move to target location
-		// transform.position = TargetPosition;
+			Vector3 NewPosition = new Vector3((int) TargetPosition.x, (int) TargetPosition.y + YPlacement, (int) TargetPosition.z);
 		
 			transform.position = NewPosition;		// Move to new position
 		}

@@ -29,6 +29,8 @@ public class MapLayoutManager : MonoBehaviour {
 		Messenger.AddListener<Vector3>("need buildable", IsBuildable);					// Listen from PlacementBuilding
 		Messenger.AddListener<Vector3[]>("unit position change", UnitPositionChange);	// Listen from UnitPositionManager
 		Messenger.AddListener<Vector3[]>("unit position start", UnitPositionStart);		// Listen from UnitPositionManager
+		Messenger.AddListener<GameObject>("enemy died", RemoveUnit);
+		Messenger.AddListener<Vector3>("building died", RemoveBuilding);
 		CreateMapLayout();
 	}
 	
@@ -74,51 +76,43 @@ public class MapLayoutManager : MonoBehaviour {
 	
 	// Changes 9x9 square around unit to be not buildable
 	void NewBuilding(Vector3 Location)  {
-		MapLayout[(int)Location.x, (int)Location.z].SetBuildable(false);
+		MapLayout[(int)Location.x, (int)Location.z].SetBuildingOnTop(true);
 		MapLayout[(int)Location.x, (int)Location.z].SetPassable(false);
 	}
 	
 	void UnitPositionChange(Vector3[] Location) {
-		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[0].z)].SetBuildable(true);
-		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[1].z)].SetBuildable(true);
-		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[0].z)].SetBuildable(true);
-		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[1].z)].SetBuildable(true);
+		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[0].z)].RemoveUnitOnTop();
+		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[1].z)].RemoveUnitOnTop();
+		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[0].z)].RemoveUnitOnTop();
+		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[1].z)].RemoveUnitOnTop();
 		
-		MapLayout[Mathf.RoundToInt(Location[2].x), Mathf.RoundToInt(Location[2].z)].SetBuildable(false);
-		MapLayout[Mathf.RoundToInt(Location[3].x), Mathf.RoundToInt(Location[3].z)].SetBuildable(false);
-		MapLayout[Mathf.RoundToInt(Location[3].x), Mathf.RoundToInt(Location[2].z)].SetBuildable(false);
-		MapLayout[Mathf.RoundToInt(Location[2].x), Mathf.RoundToInt(Location[3].z)].SetBuildable(false);
-		
-		/*
-		Vector3 OldLocation = new Vector3(Mathf.Round(Location[0].x - .5f), Mathf.Round(Location[0].y), Mathf.Round(Location[0].z - .5f));
-		Vector3 NewLocation = new Vector3(Mathf.Round(Location[1].x - .5f), Mathf.Round(Location[1].y), Mathf.Round(Location[1].z - .5f));
-		
-		MapLayout[(int)OldLocation.x, (int)OldLocation.z].SetBuildable(true);
-		MapLayout[(int)OldLocation.x + 1, (int)OldLocation.z].SetBuildable(true);
-		MapLayout[(int)OldLocation.x, (int)OldLocation.z + 1].SetBuildable(true);
-		MapLayout[(int)OldLocation.x +1, (int)OldLocation.z + 1].SetBuildable(true);
-		
-		MapLayout[(int)NewLocation.x, (int)NewLocation.z].SetBuildable(false);
-		MapLayout[(int)NewLocation.x + 1, (int)NewLocation.z].SetBuildable(false);
-		MapLayout[(int)NewLocation.x, (int)NewLocation.z + 1].SetBuildable(false);
-		MapLayout[(int)NewLocation.x + 1, (int)NewLocation.z + 1].SetBuildable(false);
-		*/
+		MapLayout[Mathf.RoundToInt(Location[2].x), Mathf.RoundToInt(Location[2].z)].AddUnitOnTop();
+		MapLayout[Mathf.RoundToInt(Location[3].x), Mathf.RoundToInt(Location[3].z)].AddUnitOnTop();
+		MapLayout[Mathf.RoundToInt(Location[3].x), Mathf.RoundToInt(Location[2].z)].AddUnitOnTop();
+		MapLayout[Mathf.RoundToInt(Location[2].x), Mathf.RoundToInt(Location[3].z)].AddUnitOnTop();
 	}
 	
 	// Sets position of unit start locations to be not buildable
 	void UnitPositionStart(Vector3[] Location) {
-		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[0].z)].SetBuildable(false);
-		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[1].z)].SetBuildable(false);
-		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[0].z)].SetBuildable(false);
-		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[1].z)].SetBuildable(false);
-		// MapLayout[(int)Location[0].x, (int)Location[0].z].SetBuildable(false);
+		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[0].z)].AddUnitOnTop();
+		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[1].z)].AddUnitOnTop();
+		MapLayout[Mathf.RoundToInt(Location[1].x), Mathf.RoundToInt(Location[0].z)].AddUnitOnTop();
+		MapLayout[Mathf.RoundToInt(Location[0].x), Mathf.RoundToInt(Location[1].z)].AddUnitOnTop();
+	}
+	
+	void RemoveUnit(GameObject Unit) {
+		Renderer renderer = Unit.GetComponent<Renderer>();
+		Vector3 MinPosition = new Vector3(renderer.bounds.min.x, renderer.bounds.min.y, renderer.bounds.min.z);
+		Vector3 MaxPosition = new Vector3(renderer.bounds.max.x, renderer.bounds.max.y, renderer.bounds.max.z);
 		
-		
-		/*
-		MapLayout[(int)Location.x, (int)Location.z].SetBuildable(false);
-		MapLayout[(int)Location.x + 1, (int)Location.z].SetBuildable(false);
-		MapLayout[(int)Location.x, (int)Location.z + 1].SetBuildable(false);
-		MapLayout[(int)Location.x + 1, (int)Location.z + 1].SetBuildable(false);
-		*/
+		MapLayout[Mathf.RoundToInt(MinPosition.x), Mathf.RoundToInt(MinPosition.z)].RemoveUnitOnTop();
+		MapLayout[Mathf.RoundToInt(MaxPosition.x), Mathf.RoundToInt(MaxPosition.z)].RemoveUnitOnTop();
+		MapLayout[Mathf.RoundToInt(MaxPosition.x), Mathf.RoundToInt(MinPosition.z)].RemoveUnitOnTop();
+		MapLayout[Mathf.RoundToInt(MinPosition.x), Mathf.RoundToInt(MaxPosition.z)].RemoveUnitOnTop();
+	}
+	
+	void RemoveBuilding(Vector3 Location) {
+		MapLayout[(int)Location.x, (int)Location.z].SetBuildingOnTop(false);
+		MapLayout[(int)Location.x, (int)Location.z].SetPassable(true);
 	}
 }

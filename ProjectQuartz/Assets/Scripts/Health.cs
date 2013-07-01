@@ -18,6 +18,12 @@ public class Health : MonoBehaviour {
 			CurrentHealth = MaxHealth;
 		}
 		if(CurrentHealth <= 0) {
+			if(gameObject.tag == "Enemy") {
+				Messenger.Broadcast<GameObject>("enemy died", transform.gameObject);
+			}
+			else if(gameObject.tag == "FriendlyBuilding" || gameObject.tag == "Tower"){
+				Messenger.Broadcast<Vector3>("building died", transform.position);
+			}
 			Destroy (gameObject);
 		}
 	}

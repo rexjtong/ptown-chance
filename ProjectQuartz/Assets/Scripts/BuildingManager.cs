@@ -4,9 +4,8 @@ using System.Collections;
 public class BuildingManager : MonoBehaviour{
 	
 	// Transforms for PreBuildings
-	public Transform OneSpacePlacing;
-	public Transform OneSpaceTowerPlacing;
-	public Transform FourSpacePlacing;
+	public Transform OneByOneTowerPlacement;
+	public Transform TwoByTwoPlacement;
 	
 	private bool BuildingNow = false;	// Is building mode on
 	private bool Buildable;				// Is node buildable
@@ -26,7 +25,7 @@ public class BuildingManager : MonoBehaviour{
 			if(Input.GetButtonDown("ToggleGrid")) {
 				Messenger.Broadcast("start building");				// Send to PlacementBuilding/CharacterController
 				BuildingNow = true;
-				Instantiate(OneSpaceTowerPlacing);						// Create the PreBuilding
+				Instantiate(OneByOneTowerPlacement);						// Create the PreBuilding
 			}
 		}
 		// when building mode is on

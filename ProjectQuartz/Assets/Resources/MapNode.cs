@@ -7,9 +7,11 @@ using System.Collections.Generic;
  * */
 public class MapNode {
 	
-	bool Visible = false;			// can node be seen
-	bool Passable = true;		// can node be moved on
-	bool Buildable = true;			// can node be builded on
+	private bool Visible = false;			// can node be seen
+	private bool Passable = true;		// can node be moved on
+	private bool Buildable = true;			// can node be builded on
+	private int UnitOnTop = 0;
+	private bool BuildingOnTop = false;
 	Transform TerrainPrefab;		// prefab used for the node
 	
 	private static int MaxConnections = 8;
@@ -39,6 +41,30 @@ public class MapNode {
 	
 	public void SetBuildable(bool Value) {
 		Buildable = Value;
+	}
+	
+	public void AddUnitOnTop() {
+		UnitOnTop++;
+		if(UnitOnTop > 0 || BuildingOnTop)
+			Buildable = false;
+		else
+			Buildable = true;
+	}
+	
+	public void RemoveUnitOnTop() {
+		UnitOnTop--;
+		if(UnitOnTop > 0 || BuildingOnTop)
+			Buildable = false;
+		else
+			Buildable = true;
+	}
+	
+	public void SetBuildingOnTop(bool Value) {
+		BuildingOnTop = Value;
+		if(UnitOnTop > 0 || BuildingOnTop)
+			Buildable = false;
+		else
+			Buildable = true;
 	}
 	
 	public void SetTerrainNode(Transform prefab) {
