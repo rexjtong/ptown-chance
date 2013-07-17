@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 	
 	public float speed = 100;					//The AI's speed per second
 	public Path path;							//The calculated path
-	public float nextWaypointDistance = 3;		//The max distance from the AI to a waypoint for it to continue to the next waypoint
+	public float nextWaypointDistance = .5f;		//The max distance from the AI to a waypoint for it to continue to the next waypoint
     
 	private Vector3 targetPosition;				//The point to move to
     private Seeker seeker;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
  
-    public void Update () {
+    public void FixedUpdate () {
 		if(Input.GetMouseButtonDown(1)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
@@ -37,11 +37,10 @@ public class PlayerController : MonoBehaviour {
 			RaycastHit hit_ground;
 			if(Physics.Raycast(ray_ground, out hit_ground, Mathf.Infinity, ground_Layer)) {
 				targetPosition = hit_ground.point;
-				seeker.StartPath (transform.position,targetPosition, OnPathComplete);
+				seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 			}
 		}
         if (path == null) {
-            //We have no path to move after yet
             return;
         }
         
