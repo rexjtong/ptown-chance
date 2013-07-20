@@ -6,6 +6,7 @@ public class TowerPlacement : MonoBehaviour {
 	public Material Green;
 	public Material Red;
 	
+	private int collisionCount;
 	private bool Buildable = true;
 	
 	void Awake () {
@@ -19,6 +20,11 @@ public class TowerPlacement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(collisionCount == 0) {
+			Buildable = true;
+		}
+		else
+			Buildable = false;
 		if(!Buildable) {
 			transform.renderer.material = Red;
 		}
@@ -29,15 +35,19 @@ public class TowerPlacement : MonoBehaviour {
 	void PlaceTower() {
 	}
 	
-	void OnTriggerStay(Collider other) {
-		if(other.CompareTag("Unit") || other.CompareTag("Player") || other.CompareTag("Terrain")){
-			Buildable = false;
+	void OnTriggerEnter(Collider other) {
+		if(other.CompareTag("Unit") || other.CompareTag("Player") || other.CompareTag("Terrain") || other.CompareTag("Building")){
+			collisionCount++;
 		}
 	}
 	
 	void OnTriggerExit(Collider other) {
-		if(other.CompareTag("Unit") || other.CompareTag("Player") || other.CompareTag("Terrain")){
-			Buildable = true;
+		if(other.CompareTag("Unit") || other.CompareTag("Player") || other.CompareTag("Terrain") || other.CompareTag("Building")){
+			collisionCount--;
 		}
+	}
+	
+	public bool isBuildable() {
+		return Buildable;
 	}
 }

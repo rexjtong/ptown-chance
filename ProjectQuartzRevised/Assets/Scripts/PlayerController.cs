@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Pathfinding;
+using System;
 
 public class PlayerController : MonoBehaviour {
 	
@@ -12,11 +13,21 @@ public class PlayerController : MonoBehaviour {
     private Seeker seeker;
     private CharacterController controller;
 	private int currentWaypoint = 0;			//The waypoint we are currently moving towards
+	private bool nowPlacing = false;
+	private bool nowBuilding = false;
+	private bool cancelFirstClick = false;
  
+	void Awake () {
+		Messenger.AddListener<Vector3>("move to building", MoveToPlacement);
+		Messenger.AddListener("building mode", SetBuildingMode);
+		Messenger.AddListener("confirm building", ConfirmBuilding);
+	}
+	
     public void Start () {
         seeker = GetComponent<Seeker>();
         controller = GetComponent<CharacterController>();
         targetPosition = transform.position;
+		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
     }
     
     public void OnPathComplete (Path p) {
@@ -29,17 +40,40 @@ public class PlayerController : MonoBehaviour {
     }
  
     public void FixedUpdate () {
-		if(Input.GetMouseButtonDown(1)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			var ray_ground = Camera.main.ScreenPointToRay(Input.mousePosition);
-			var ground_Layer = 1 << 8;
-			RaycastHit hit_ground;
-			if(Physics.Raycast(ray_ground, out hit_ground, Mathf.Infinity, ground_Layer)) {
-				targetPosition = hit_ground.point;
-				seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+		if(!nowBuilding) {
+			if(Input.GetMouseButtonDown(1) && !cancelFirstClick) {
+				path = null;
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hit;
+				var ray_ground = Camera.main.ScreenPointToRay(Input.mousePosition);
+				var ground_Layer = 1 << 8;
+				RaycastHit hit_ground;
+				if(Physics.Raycast(ray_ground, out hit_ground, Mathf.Infinity, ground_Layer)) {
+					targetPosition = hit_ground.point;
+					seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+				}
+			}
+			if(cancelFirstClick) {
+				path = null;
+				cancelFirstClick = false;
 			}
 		}
+		
+		if(nowBuilding) {
+			if(Input.GetMouseButtonDown(1)) {
+				nowBuilding = false;
+				nowPlacing = false;
+				Messenger.Broadcast("cancel building mode");
+			}
+		}
+		
+		if(nowPlacing) {
+			if(Math.Abs(transform.position.x - targetPosition.x) <= 3 && Math.Abs(transform.position.z - targetPosition.z) <= 3) {
+				currentWaypoint = path.vectorPath.Count;
+				Messenger.Broadcast("place building");
+			}
+		}
+		
         if (path == null) {
             return;
         }
@@ -50,8 +84,7 @@ public class PlayerController : MonoBehaviour {
         }
         
         //Direction to the next waypoint
-        Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
-        dir *= speed * Time.fixedDeltaTime;
+        Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized * speed * Time.fixedDeltaTime;
         controller.SimpleMove (dir);
         
         //Check if we are close enough to the next waypoint
@@ -61,4 +94,22 @@ public class PlayerController : MonoBehaviour {
             return;
         }
     }
+	
+	void MoveToPlacement(Vector3 Location) {
+		nowPlacing = true;
+		targetPosition = Location;
+		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+	}
+	
+	void SetBuildingMode() {
+		nowBuilding = true;
+		cancelFirstClick = true;
+	}
+	
+	void ConfirmBuilding() {
+		nowPlacing = false;
+		nowBuilding = false;
+		cancelFirstClick = false;
+		// nowBuilding = false;
+	}
 } 
