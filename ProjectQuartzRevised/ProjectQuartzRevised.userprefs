@@ -1,14 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ResourceManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="95" Column="10" />
-      <File FileName="Assets\Scripts\BuildingManager.cs" Line="133" Column="44" />
-      <File FileName="Assets\Scripts\BuildingNode.cs" Line="8" Column="3" />
-      <File FileName="Assets\Scripts\CameraController.cs" Line="48" Column="56" />
-      <File FileName="Assets\Scripts\LevelLayout.cs" Line="16" Column="1" />
-      <File FileName="Assets\Scripts\TowerPlacement.cs" Line="45" Column="125" />
-      <File FileName="Assets\Resources\Messenger.cs" Line="251" Column="1" />
+      <File FileName="Assets\Scripts\ResourceManager.cs" Line="22" Column="3" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="89" Column="9" />
+      <File FileName="Assets\Scripts\Quarry.cs" Line="30" Column="59" />
+      <File FileName="Assets\Scripts\BuildingCollider.cs" Line="23" Column="89" />
+      <File FileName="Assets\Scripts\Health.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BuildingManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BuildingPlacement.cs" Line="51" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

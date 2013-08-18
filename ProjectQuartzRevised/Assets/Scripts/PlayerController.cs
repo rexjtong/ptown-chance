@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 	
 	public float speed = 100;					//The AI's speed per second
 	public Path path;							//The calculated path
-	public float nextWaypointDistance = .5f;		//The max distance from the AI to a waypoint for it to continue to the next waypoint
+	public float nextWaypointDistance = .5f;	//The max distance from the AI to a waypoint for it to continue to the next waypoint
     
 	private Vector3 targetPosition;				//The point to move to
     private Seeker seeker;
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		
 		if(nowPlacing) {
-			if(Math.Abs(transform.position.x - targetPosition.x) <= 3 && Math.Abs(transform.position.z - targetPosition.z) <= 3) {
+			if(Math.Abs(transform.position.x - targetPosition.x) <= 10 && Math.Abs(transform.position.z - targetPosition.z) <= 10) {
 				currentWaypoint = path.vectorPath.Count;
 				Messenger.Broadcast("place building");
 			}
@@ -84,12 +84,12 @@ public class PlayerController : MonoBehaviour {
         }
         
         //Direction to the next waypoint
-        Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized * speed * Time.fixedDeltaTime;
+        Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized * speed * Time.fixedDeltaTime;
         controller.SimpleMove (dir);
         
         //Check if we are close enough to the next waypoint
         //If we are, proceed to follow the next waypoint
-        if (Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
+        if (Vector3.Distance (transform.position, path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
             currentWaypoint++;
             return;
         }
